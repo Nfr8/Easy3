@@ -1,0 +1,159 @@
+my-ai-platform/
+├── components/
+│   ├── FeatureList.js
+│   ├── BalancedScorecard.js
+│   └── ScenarioButton.js
+├── pages/
+│   ├── index.js
+├── styles/
+│   ├── globals.css
+└── package.json
+import FeatureList from '../components/FeatureList';
+import BalancedScorecard from '../components/BalancedScorecard';
+
+export default function Home() {
+  return (
+    <div>
+      <header>
+        <h1>SME Strategy and M&A Platform</h1>
+        <p>Your AI-driven platform for strategic growth and acquisition support.</p>
+      </header>
+      <FeatureList />
+      <BalancedScorecard />
+    </div>
+  );
+}
+export default function FeatureList() {
+  const features = [
+    "Strategy Development",
+    "Deal Matching and M&A",
+    "Regulatory & Compliance",
+    "Real-Time Data Integration",
+    "Financial Forecasting and Risk Analysis",
+    "Operational Optimization",
+    "Market and Competitive Intelligence",
+    "Investor Relations and Capital Raising Support"
+  ];
+
+  return (
+    <section>
+      <h2>Main Features</h2>
+      <ul>
+        {features.map((feature, index) => (
+          <li key={index}>{feature}</li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+import { useState } from 'react';
+import ScenarioButton from './ScenarioButton';
+
+export default function BalancedScorecard() {
+  const [indicators, setIndicators] = useState({
+    revenue: "$500,000",
+    profitMargin: "20%",
+    growthPotential: "High",
+    marketPosition: "Strong"
+  });
+
+  const handleScenarioChange = (scenario) => {
+    // Example scenario adjustments
+    if (scenario === "Expansion") {
+      setIndicators({
+        revenue: "$600,000",
+        profitMargin: "18%",
+        growthPotential: "Moderate",
+        marketPosition: "Expanding"
+      });
+    } else if (scenario === "Cost Reduction") {
+      setIndicators({
+        revenue: "$500,000",
+        profitMargin: "25%",
+        growthPotential: "High",
+        marketPosition: "Stable"
+      });
+    }
+  };
+
+  return (
+    <section>
+      <h2>Balanced Scorecard</h2>
+      <div className="scorecard">
+        <div><strong>Revenue:</strong> {indicators.revenue}</div>
+        <div><strong>Profit Margin:</strong> {indicators.profitMargin}</div>
+        <div><strong>Growth Potential:</strong> {indicators.growthPotential}</div>
+        <div><strong>Market Position:</strong> {indicators.marketPosition}</div>
+      </div>
+      <div className="scenario-buttons">
+        <ScenarioButton label="Expansion" onClick={() => handleScenarioChange("Expansion")} />
+        <ScenarioButton label="Cost Reduction" onClick={() => handleScenarioChange("Cost Reduction")} />
+      </div>
+    </section>
+  );
+}
+export default function ScenarioButton({ label, onClick }) {
+  return (
+    <button onClick={onClick}>{label}</button>
+  );
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f4f4f4;
+}
+
+section {
+  padding: 1rem 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 0.5rem 0;
+}
+
+.scorecard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.scenario-buttons {
+  margin-top: 1rem;
+}
+
+button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005bb5;
+}
